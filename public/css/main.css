@@ -1,0 +1,21 @@
+.light-logo {
+    width: 40px;
+}
+
+.bg-gris {
+    background-color: #565656 !important;
+}
+
+.fw-white {
+    color: #FFFFFF !important;
+}
+
+.btn-gris {
+    background-color: #565656 !important;
+    color: #FFFFFF !important;
+}
+
+.btn-gris:hover {
+    background-color: #3f3f3f !important;
+    color: #FFFFFF !important;
+}
