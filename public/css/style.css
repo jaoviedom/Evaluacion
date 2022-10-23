@@ -1718,10 +1718,10 @@ pre {
   .table th,
   .table td {
     padding: 1rem;
-    vertical-align: top;
+    /* vertical-align: top; */
     border-top: 1px solid #dee2e6; }
   .table thead th {
-    vertical-align: bottom;
+    /* vertical-align: bottom; */
     border-bottom: 2px solid #dee2e6; }
   .table tbody + tbody {
     border-top: 2px solid #dee2e6; }
@@ -4149,8 +4149,9 @@ input[type="button"].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 0px solid transparent;
-  border-radius: 0px; }
+  /* border: 0px solid transparent; */
+  /* border-radius: 0px;  */
+}
   .card > hr {
     margin-right: 0;
     margin-left: 0; }

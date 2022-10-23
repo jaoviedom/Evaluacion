@@ -16,6 +16,7 @@ class Idea extends Model
         'email',
         'celular',
         'gestor', 
+        'linea',
         'estado',
     ];
 }

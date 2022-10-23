@@ -276,6 +276,7 @@ class IdeaController extends Controller
         }
         $evaluacion = Evaluacion::where('idea_id', $id)->first();
         $detallesEvaluacion = DetalleEvaluacion::where('evaluacion_id', $evaluacion->id)->get();
-        dd($detallesEvaluacion);
+        $idea = Idea::findOrFail($evaluacion->idea_id);
+        return view('evaluacion.resultado', compact('evaluacion', 'idea', 'detallesEvaluacion'));
     }
 }

@@ -138,4 +138,9 @@ class EvaluacionController extends Controller
         $user = Auth::user();
         return view('evaluacion.show', compact('evaluacion', 'idea', 'ideasMenu', 'usuariosMenu', 'user'));
     }
+
+    public function finalStore(Request $request)
+    {
+        dd("IN");
+    }
 }

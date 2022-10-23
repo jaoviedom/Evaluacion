@@ -15,14 +15,15 @@ class CreateIdeasTable extends Migration
     {
         Schema::create('ideas', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('codigo');
-            $table->string('talento');
-            $table->string('profesion');
-            $table->string('tipoActor');
-            $table->string('email');
-            $table->string('celular');
+            $table->string('titulo')->nullable();
+            $table->string('codigo')->nullable();
+            $table->string('talento')->nullable();
+            $table->string('profesion')->nullable();
+            $table->string('tipoActor')->nullable();
+            $table->string('email')->nullable();
+            $table->string('celular')->nullable();
             $table->bigInteger('gestor')->nullable();
+            $table->string('linea')->nullable();
             $table->string('estado')->default('Convocado');
             $table->timestamps();
             $table->softDeletes();
