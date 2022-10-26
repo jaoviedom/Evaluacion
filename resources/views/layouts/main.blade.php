@@ -149,20 +149,6 @@
                                             @endguest
                                         </h5>
                                     </a>
-                                    {{-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="Userdd">
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-email m-r-5 m-l-5"></i> Inbox</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                                    </div> --}}
                                 </div>
                             </div>
                             <!-- End User Profile-->
@@ -181,6 +167,12 @@
                                     <a href="{{ route('ideas.index') }}" class="@if($ideasMenu ?? '' == true) btn d-block w-100 create-btn text-white no-block d-flex align-items-center @else sidebar-link waves-effect waves-dark @endif">
                                         <i class="fa-solid fa-lightbulb"></i>
                                         <span class="hide-menu m-l-5">Ideas</span> 
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">            
+                                    <a href="{{ route('informes.index') }}" class="@if($informesMenu ?? '' == true) btn d-block w-100 create-btn text-white no-block d-flex align-items-center @else sidebar-link waves-effect waves-dark @endif">
+                                        <i class="fa-solid fa-lightbulb"></i>
+                                        <span class="hide-menu m-l-5">Informes</span> 
                                     </a>
                                 </li>
                                 @can(['evaluador'])

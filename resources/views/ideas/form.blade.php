@@ -57,17 +57,27 @@
     <label for="correo">Estado</label>
 </div>
 
-    <hr>
-    <div class="form-floating mb-3">
-        <select class="form-select" name="gestor" id="gestor" @if($modo == "Ver" || !$asignarGestor) disabled @endif>
-            <option value="" selected>Seleccione...</option>
-            @foreach ($gestores as $item)
-                <option value="{{ $item->id }}" @if(isset($idea->gestor) && $idea->gestor == $item->id) selected @endif>{{ $item->name }}</option>
-            @endforeach
-        </select>
-        <label for="floatingSelect">Gestor</label>
-    </div>
-    <input type="hidden" name="estado" value="Asignado">
+<div class="form-floating mb-3">
+    <select class="form-select" name="linea" id="linea" @if($modo == "Ver" || $asignarGestor) disabled @endif>
+        <option value="" selected>Seleccione...</option>
+        <option value="Tecnologías virtuales" @if(isset($idea->linea) && $idea->linea == "Tecnologías virtuales") selected @endif>Tecnologías virtuales</option>
+        <option value="Electrónica y telecomunicaciones" @if(isset($idea->linea) && $idea->linea == "Electrónica y telecomunicaciones") selected @endif>Electrónica y telecomunicaciones</option>
+        <option value="Bio y nanotecnología" @if(isset($idea->linea) && $idea->linea == "Bio y nanotecnología") selected @endif>Bio y nanotecnología</option>
+    </select>
+    <label for="floatingSelect">Línea</label>
+</div>
+
+<hr>
+<div class="form-floating mb-3">
+    <select class="form-select" name="gestor" id="gestor" @if($modo == "Ver" || !$asignarGestor) disabled @endif>
+        <option value="" selected>Seleccione...</option>
+        @foreach ($gestores as $item)
+            <option value="{{ $item->id }}" @if(isset($idea->gestor) && $idea->gestor == $item->id) selected @endif>{{ $item->name }}</option>
+        @endforeach
+    </select>
+    <label for="floatingSelect">Gestor</label>
+</div>
+<input type="hidden" name="estado" value="Asignado">
 
 @if($modo != "Ver") 
     @if (isset($asignarGestor) && $asignarGestor)

@@ -35,8 +35,9 @@ class EvaluacionController extends Controller
     public function irEditarEvaluacion($id)
     {
         $idea = Idea::find($id);
-        $evaluacion = DetalleEvaluacion::find($id);
-        return view('evaluacion.editar', compact('idea', 'evaluacion'));
+        $user = Auth::user();
+        $evaluacion = DetalleEvaluacion::where('evaluacion_id',$id)->where('user_id', $user->id)->first();
+        return view('evaluacion.editar', compact('idea', 'evaluacion', 'user'));
     }
 
     public function store(Request $request)
@@ -90,7 +91,7 @@ class EvaluacionController extends Controller
     {
         $evaluacion = Evaluacion::find($request->idea);
 
-        $detalle = DetalleEvaluacion::where('evaluacion_id', $request->idea)->first();
+        $detalle = DetalleEvaluacion::where('evaluacion_id', $request->idea)->where('user_id', Auth::user()->id)->first();
         // dd($request);
         $detalle->criterio1 = $request->criterio1;
         $detalle->criterio2 = $request->criterio2;
@@ -113,7 +114,6 @@ class EvaluacionController extends Controller
         
         $detalle->observaciones = $request->observaciones;
         $detalle->evaluacion_id = $evaluacion->id;
-        
         $detalle->save();
 
         $ideaEvaluador = IdeaEvaluador::where('idea_id', $request->idea)
@@ -141,6 +141,12 @@ class EvaluacionController extends Controller
 
     public function finalStore(Request $request)
     {
-        dd("IN");
+        $evaluacion = Evaluacion::where('idea_id',$request->idea)
+                                ->first();
+        $evaluacion->update($request->all());
+        $idea = Idea::findOrFail($request->idea);
+        $idea->estado = $request->estado;
+        $idea->save();
+        return redirect()->route('ideas.index')->with('mensaje', 'Se han guardado la evaluacion exitosamente');
     }
 }

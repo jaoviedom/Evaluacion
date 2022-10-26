@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EvaluacionController;
+use App\Http\Controllers\InformesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +44,10 @@ Route::get('ideas/evaluacion/resultados/{id}', [IdeaController::class, 'resultad
 
 Route::get('evaluar/', [EvaluacionController::class, 'indexEvaluar'])->name('evaluar.index')->middleware(['auth']);
 Route::get('evaluar/{id}', [EvaluacionController::class, 'irEvaluar'])->name('evaluar.irEvaluar')->middleware(['auth']);
-Route::post('evaluar', [EvaluacionController::class, 'store'])->name('evaluacion.store')->middleware(['auth']);
+Route::post('evaluar/store', [EvaluacionController::class, 'store'])->name('evaluacion.store')->middleware(['auth']);
 Route::get('evaluacion/{id}', [EvaluacionController::class, 'show'])->name('evaluacion.show')->middleware(['auth']);
 Route::get('evaluar/{id}/edit', [EvaluacionController::class, 'irEditarEvaluacion'])->name('evaluar.irEditarEvaluacion')->middleware(['auth']);
 Route::put('evaluar/{id}', [EvaluacionController::class, 'update'])->name('evaluacion.update')->middleware(['auth']);
 Route::post('evaluar', [EvaluacionController::class, 'finalStore'])->name('evaluacion.final-store')->middleware(['auth']);
+
+Route::get('informes', [InformesController::class, 'index'])->name('informes.index')->middleware(['auth']);
