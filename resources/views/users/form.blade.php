@@ -11,7 +11,7 @@
 @endif
 
 <div class="form-floating mb-3">
-    <input type="text" class="form-control" placeholder="a" name="id" id="id" value="{{ isset( $usuario->id ) ? $usuario->id : old('id') }}" required @if($modo == "Ver") readonly @endif>
+    <input type="hidden" class="form-control" placeholder="a" name="id" id="id" value="{{ isset( $usuario->id ) ? $usuario->id : old('id') }}" required @if($modo == "Ver") readonly @endif>
     <label for="nombre">ID</label>
 </div>
 

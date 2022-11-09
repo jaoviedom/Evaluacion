@@ -8,6 +8,11 @@
         <form action="{{ route('evaluacion.final-store') }}" method="post" class="needs-validation" method="post" enctype="multipart/form-data" novalidate>
             @csrf
             <h1 class="text-center my-3">Evaluación de ideas de base tecnológica</h1>
+            <div class="d-flex justify-content-end py-3">
+                <a href="{{ route('informes.convertirEvaluacionPDF', $idea->id) }}" class="link-secondary">
+                    <i class="fa-solid fa-print fa-2xl"></i>
+                </a>
+            </div>
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="form-floating mb-3">
@@ -50,18 +55,7 @@
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="a" placeholder="a" value="{{ $idea->celular }}" readonly>
                         <label for="floatingPassword">Número de teléfono celular</label>
-                    </div>
-                    {{-- <div class="form-floating">
-                        <select class="form-select" id="a" name="estado">
-                            <option  value=1 @if(isset($idea->estado) && $idea->estado == "Convocado") selected @endif>Convocado</option>
-                            <option  value=1 @if(isset($idea->estado) && $idea->estado == "Asignado") selected @endif>Asignado</option>
-                            <option  value=1 @if(isset($idea->estado) && $idea->estado == "Evaluado") selected @endif>Evaluado</option>
-                            <option  value=1 @if(isset($idea->estado) && $idea->estado == "Viable") selected @endif>Viable</option>
-                            <option  value=1 @if(isset($idea->estado) && $idea->estado == "No viable") selected @endif>No viable</option>
-                        </select>
-                        <label for="floatingSelect">Estado</label>
-                    </div> --}}
-                    
+                    </div>                    
                     <input type="hidden" name="idea" value="{{ $idea->id}}">
                 </div>
             </div>

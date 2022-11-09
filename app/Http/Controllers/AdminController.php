@@ -71,6 +71,28 @@ class AdminController extends Controller
         ]);
     }
 
+    public function verEdicionMisDatos($id)
+    {
+        // dd($id);
+
+        $roles = Rol::orderBy('nombre')->get();
+
+        $usuario = User::join('rol_user', 'users.id', 'rol_user.user_id')
+                        ->join('rols','rol_user.rol_id', 'rols.id')
+                        ->where('users.id', $id)
+                        ->select('users.*', 'rols.nombre as rol')
+                        ->first();
+        $usuario = User::findOrFail($id);
+        $rolesUsuario = DB::select('select * from rol_user where user_id = :id', ['id' => $id]);
+        return view('users.editMisDatos')->with([
+            'usuario' => $usuario,
+            'roles' => $roles,
+            'usuariosMenu' => true,
+            'ideasMenu' => false,
+            'rolesUsuario' => $rolesUsuario,
+        ]);
+    }
+
     public function updateUsuario(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -87,5 +109,23 @@ class AdminController extends Controller
         }
 
         return redirect()->route('verUsuarios');
+    }
+
+    public function updateMisDatos(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        // $user->roles()->sync($request->rol);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        
+        if ($user->save()) {
+            $request->session()->flash('mensaje',  '¡Se han modificado los datos del usuario '. $user->name . ' exitosamente!');
+        } else {
+            $request->session()->flash('mensaje', '¡Hubo un error al modificar los datos del usuario '. $user->name .'!');
+        }
+
+        return redirect()->route('home');
     }
 }

@@ -8271,12 +8271,15 @@ html[dir="ltr"] body .p-l-0 {
  For all pages 
  ============================================================== */
 #main-wrapper {
+  height: 100%;
   width: 100%;
   overflow: hidden; }
 
 .page-wrapper {
   background: #eef5f9;
-  position: relative; }
+  position: relative; 
+  height: 100%;
+}
 
 .page-wrapper > .container-fluid {
   padding: 20px;
@@ -8459,6 +8462,7 @@ html[dir="ltr"] body .p-l-0 {
   outline: none; }
 
 body {
+  height: 100vh;
   margin: 0;
   overflow-x: hidden;
   color: #3e5569;

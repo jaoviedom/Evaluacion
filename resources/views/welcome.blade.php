@@ -1,10 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-    <main class="d-flex justify-content-center align-items-center">
-        <h1 class="text-center">
-            Bienvenido al sistema de evaluación de ideas
-        </h1>
+    <main class="d- flex-column justify-content-center align-items-center">
+        <h1 class="text-center mt-5">Bienvenido al sistema de evaluación de ideas</h1>
+        <img src="{{ asset('images/logo-tecnoparque-verde.svg') }}" alt="Logo Tecnoparque" class="my-5 px-5">
     </main>
     
 

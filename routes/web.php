@@ -34,6 +34,9 @@ Route::get('usuarios', [AdminController::class, 'verUsuarios'])->name('verUsuari
 Route::get('usuarios/{id}', [AdminController::class, 'verUsuario'])->name('usuarios.show')->middleware(['auth']);
 Route::get('usuarios/{id}/edit', [AdminController::class, 'editUsuario'])->name('usuarios.edit')->middleware(['auth']);
 Route::put('usuarios/{id}', [AdminController::class, 'updateUsuario'])->name('usuarios.update')->middleware(['auth']);
+Route::get('usuario/{id}',[AdminController::class, 'verEdicionMisDatos'])->name('usuarios.verEditarMisDatos')->middleware(['auth']);
+Route::put('usuarios/{id}', [AdminController::class, 'updateMisDatos'])->name('usuarios.updateMisDatos')->middleware(['auth']);
+
 
 Route::get('ideas/gestor/{id}', [IdeaController::class, 'asignarGestor'])->name('ideas.asignar-gestor')->middleware(['auth']);
 Route::put('ideas/gestor/{id}', [IdeaController::class, 'guardarGestor'])->name('ideas.guardar-gestor')->middleware(['auth']);
@@ -51,3 +54,8 @@ Route::put('evaluar/{id}', [EvaluacionController::class, 'update'])->name('evalu
 Route::post('evaluar', [EvaluacionController::class, 'finalStore'])->name('evaluacion.final-store')->middleware(['auth']);
 
 Route::get('informes', [InformesController::class, 'index'])->name('informes.index')->middleware(['auth']);
+Route::get('informes/pdf/{id}', [InformesController::class, 'convertirEvaluacionPDF'])->name('informes.convertirEvaluacionPDF')->middleware(['auth']);
+Route::get('informes/consolidado', [InformesController::class, 'consolidado'])->name('informes.consolidado')->middleware(['auth']);
+Route::post('informes/consolidado', [InformesController::class, 'generarConsolidado'])->name('informes.generarConsolidado')->middleware(['auth']);
+Route::get('informes/linea', [InformesController::class, 'linea'])->name('informes.linea')->middleware(['auth']);
+Route::post('informes/linea', [InformesController::class, 'generarLinea'])->name('informes.generarLinea')->middleware(['auth']);

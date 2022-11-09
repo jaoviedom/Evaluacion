@@ -23,6 +23,54 @@
     <link rel="stylesheet" href="{{ asset('bootstrap-5.2.0/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <style>
+        .highcharts-figure,
+        .highcharts-data-table table {
+        min-width: 310px;
+        max-width: 800px;
+        margin: 1em auto;
+        }
+
+        #container {
+        height: 400px;
+        }
+
+        .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+        }
+
+        .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+        }
+
+        .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+        }
+
+        .highcharts-data-table td,
+        .highcharts-data-table th,
+        .highcharts-data-table caption {
+        padding: 0.5em;
+        }
+
+        .highcharts-data-table thead tr,
+        .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+        }
+
+        .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+        }
+    </style>
 </head>
 
 <body>
@@ -40,7 +88,7 @@
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
                         <b class="logo-icon">
-                            <img src="{{ asset('images/Logo-SENA-blanco.png') }}" alt="Logo" class="light-logo " />
+                            <img src="{{ asset('images/logo-tecnoparque-blanco.png') }}" alt="Logo" class="light-logo " />
                         </b>
                     </a>
                     <!-- This is for the sidebar toggle which is visible on mobile only -->
@@ -49,13 +97,13 @@
                 </div>
                 <div class="navbar-collapse collapse " id="navbarSupportedContent" data-navbarbg="skin5">
                     <ul class="navbar-nav float-start me-auto">
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
+                        {{-- <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
                                 href="javascript:void(0)"><i class="ti-search"></i></a>
                             <form class="app-search position-absolute">
                                 <input type="text" class="form-control" placeholder="Buscar..."> <a
                                     class="srh-btn"><i class="ti-close"></i></a>
                             </form>
-                        </li>
+                        </li> --}}
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -82,6 +130,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a href="{{ route('usuarios.verEditarMisDatos', Auth::user()->id) }}" class="dropdown-item">
+                                        Mi cuenta
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
@@ -155,7 +206,19 @@
                         </li>
                         @auth
                             @cannot(['usuario'])
+                                <li class="sidebar-item">            
+                                    <a href="{{ route('ideas.index') }}" class="@if($ideasMenu ?? '' == true) btn d-block w-100 create-btn text-white no-block d-flex align-items-center @else sidebar-link waves-effect waves-dark @endif">
+                                        <i class="fa-solid fa-lightbulb"></i>
+                                        <span class="hide-menu m-l-5">Ideas</span> 
+                                    </a>
+                                </li>
                                 @can(['administrador'])
+                                    <li class="sidebar-item">            
+                                        <a href="{{ route('informes.index') }}" class="@if($informesMenu ?? '' == true) btn d-block w-100 create-btn text-white no-block d-flex align-items-center @else sidebar-link waves-effect waves-dark @endif">
+                                            <i class="fa-solid fa-chart-column"></i>
+                                            <span class="hide-menu m-l-5">Informes</span> 
+                                        </a>
+                                    </li>
                                     <li class="sidebar-item">            
                                         <a href="{{ route('verUsuarios') }}" class="@if($usuariosMenu ?? '' == true) btn d-block w-100 create-btn text-white no-block d-flex align-items-center @else sidebar-link waves-effect waves-dark @endif">
                                             <i class="fa-solid fa-users"></i>
@@ -163,18 +226,6 @@
                                         </a>
                                     </li>
                                 @endcan
-                                <li class="sidebar-item">            
-                                    <a href="{{ route('ideas.index') }}" class="@if($ideasMenu ?? '' == true) btn d-block w-100 create-btn text-white no-block d-flex align-items-center @else sidebar-link waves-effect waves-dark @endif">
-                                        <i class="fa-solid fa-lightbulb"></i>
-                                        <span class="hide-menu m-l-5">Ideas</span> 
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">            
-                                    <a href="{{ route('informes.index') }}" class="@if($informesMenu ?? '' == true) btn d-block w-100 create-btn text-white no-block d-flex align-items-center @else sidebar-link waves-effect waves-dark @endif">
-                                        <i class="fa-solid fa-lightbulb"></i>
-                                        <span class="hide-menu m-l-5">Informes</span> 
-                                    </a>
-                                </li>
                                 @can(['evaluador'])
                                 <li class="sidebar-item">            
                                     <a href="{{ route('evaluar.index') }}" class="@if($evaluarMenu ?? '' == true) btn d-block w-100 create-btn text-white no-block d-flex align-items-center @else sidebar-link waves-effect waves-dark @endif">
@@ -220,7 +271,7 @@
                 </div>
             </div>
             
-            <main class="container-fluid">
+            <main class="container-fluid h-100">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
@@ -250,9 +301,9 @@
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer text-center">
+            {{-- <footer class="footer text-center">
                 Footer
-            </footer>
+            </footer> --}}
             <!-- ============================================================== -->
             <!-- End footer -->
             <!-- ============================================================== -->

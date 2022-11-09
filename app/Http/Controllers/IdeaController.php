@@ -371,4 +371,5 @@ class IdeaController extends Controller
         return view('evaluacion.resultado', compact('evaluacion', 'idea', 'detallesEvaluacion', 'capAcomp1', 'capAcomp2', 
                     'capAcomp3', 'capAcomp4', 'capEjec1', 'capEjec2', 'resultado', 'numComite', 'fecha'));
     }
+
 }

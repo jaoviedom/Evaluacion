@@ -10,6 +10,7 @@ use App\Models\IdeaEvaluador;
 use App\Models\Evaluacion;
 use App\Models\DetalleEvaluacion;
 use Auth;
+use PDF;
 
 class EvaluacionController extends Controller
 {
@@ -149,4 +150,5 @@ class EvaluacionController extends Controller
         $idea->save();
         return redirect()->route('ideas.index')->with('mensaje', 'Se han guardado la evaluacion exitosamente');
     }
+
 }
